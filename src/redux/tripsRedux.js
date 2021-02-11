@@ -13,10 +13,6 @@ export const getFilteredTrips = ({trips, filters}) => {
 
   // TODO - filter by duration
   if(filters.duration){
-    //console.log('output', output);
-    //console.log('duration', filters.duration);
-    //console.log('typeOf from', typeof(filters.duration.from));
-    //console.log('typeOf to', typeof(filters.duration.to));
     output = output.filter(trip =>
       (trip.days >= parseInt(filters.duration.from)
       && trip.days <= parseInt(filters.duration.to))
@@ -25,10 +21,7 @@ export const getFilteredTrips = ({trips, filters}) => {
   }
   // TODO - filter by tags
   if(filters.tags){
-    //console.log('tags', filters.tags);
-    //console.log('tripTags', trips[8].tags);
     for (let tag of filters.tags){
-      console.log('w petli', tag);
       output = output.filter(trip =>
         trip.tags.includes(tag)
       );
@@ -36,13 +29,9 @@ export const getFilteredTrips = ({trips, filters}) => {
     //console.log('swiezy output', output);
   }
   // TODO - sort by cost descending (most expensive goes first)
-  if (filters) {
-    console.log('swiezutki outpucik', output);
-    const prices = [];
-    for (let trip of output){
-      prices.push(parseInt(trip.cost));
-    }
-  }
+  console.log('swiezutki outpucik', output);
+  const sorted = output.sort((a,b) => (parseInt(a.cost.slice(1)) > parseInt(b.cost.slice(1))) ? 1 : -1);
+  console.log('sorted', sorted);
   return output;
 };
 
