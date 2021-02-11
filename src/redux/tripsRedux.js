@@ -12,11 +12,37 @@ export const getFilteredTrips = ({trips, filters}) => {
   }
 
   // TODO - filter by duration
-
+  if(filters.duration){
+    //console.log('output', output);
+    //console.log('duration', filters.duration);
+    //console.log('typeOf from', typeof(filters.duration.from));
+    //console.log('typeOf to', typeof(filters.duration.to));
+    output = output.filter(trip =>
+      (trip.days >= parseInt(filters.duration.from)
+      && trip.days <= parseInt(filters.duration.to))
+    );
+    //console.log('output', output);
+  }
   // TODO - filter by tags
-
+  if(filters.tags){
+    //console.log('tags', filters.tags);
+    //console.log('tripTags', trips[8].tags);
+    for (let tag of filters.tags){
+      console.log('w petli', tag);
+      output = output.filter(trip =>
+        trip.tags.includes(tag)
+      );
+    }
+    //console.log('swiezy output', output);
+  }
   // TODO - sort by cost descending (most expensive goes first)
-
+  if (filters) {
+    console.log('swiezutki outpucik', output);
+    const prices = [];
+    for (let trip of output){
+      prices.push(parseInt(trip.cost));
+    }
+  }
   return output;
 };
 
@@ -32,10 +58,13 @@ export const getTripById = ({trips}, tripId) => {
 };
 
 export const getTripsForCountry = ({trips}, countryCode) => {
-  const filtered = trips;
+  const filtered = trips.filter(
+    trip => trip.country.code == countryCode
+  );
 
   // TODO - filter trips by countryCode
-
+  console.log('trips:', trips);
+  console.log('countryCode:', countryCode);
   console.log('filtering trips by countryCode:', countryCode, filtered);
   return filtered.length ? filtered : [{error: true}];
 };
