@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {BrowserRouter, Route} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {AnimatedSwitch} from 'react-router-transition';
-import styles from './App.scss';
+import styles from './styles/App.scss';
 import MainLayout from './components/layout/MainLayout/MainLayout';
 
 import Home from './components/views/Home/Home';
