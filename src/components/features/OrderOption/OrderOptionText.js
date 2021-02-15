@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './OrderOption.scss';
 
-const OrderOptionText = ({name,currentValue, setOptionValue}) => (
+const OrderOptionText = ({name, currentValue, setOptionValue}) => (
   <div className={styles.number}>
     <label>
       <input
