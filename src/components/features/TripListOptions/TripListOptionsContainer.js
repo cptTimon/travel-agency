@@ -16,8 +16,14 @@ const mapDispatchToProps = dispatch => ({
   changeDuration: duration => dispatch(changeDuration(duration)),
   addTag: tag => dispatch(addTag(tag)),
   removeTag: tag => dispatch(removeTag(tag)),
-  addRegion: region => dispatch(addRegion(region)),
-  removeRegion: region => dispatch(removeRegion(region)),
+  addRegion: region => dispatch(addRegion({
+    region,
+    countries: region.countries,
+  })),
+  removeRegion: region => dispatch(removeRegion({
+    region,
+    code: region.code,
+  })),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TripListOptions);
