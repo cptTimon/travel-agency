@@ -4,6 +4,8 @@ import styles from './TripListOptions.scss';
 
 import {Row, Col} from 'react-flexbox-grid';
 
+
+
 class TripListOptions extends React.Component {
   handleTags(tag, checked){
     if(checked) {
@@ -24,12 +26,22 @@ class TripListOptions extends React.Component {
     this.props.changeSearchPhrase(phrase);
   }
 
+  handleRegions(region, countries, checked){
+    if(checked) {
+      this.props.addRegion(region, countries);
+    } else {
+      this.props.removeRegion(region, countries);
+    }
+  }
+
   render(){
-    const {tags, filters} = this.props;
+    const {tags, filters, regions} = this.props;
+    console.log('regiony', regions);
+    console.log('tagi', tags);
     return (
       <div className={styles.component}>
         <Row around="lg">
-          <Col lg={4}>
+          <Col lg={3}>
             <div className={styles.filter}>
               <label>
                 <input className={`${styles.input} ${styles.search}`} type='text'
@@ -40,7 +52,7 @@ class TripListOptions extends React.Component {
               </label>
             </div>
           </Col>
-          <Col lg={4}>
+          <Col lg={3}>
             <div className={styles.filter}>
               <label>
                 Duration from:
@@ -58,7 +70,7 @@ class TripListOptions extends React.Component {
               </label>
             </div>
           </Col>
-          <Col lg={4}>
+          <Col lg={3}>
             <div className={styles.filter}>
               <details>
                 <summary className={styles.toggle}>Filter by tags</summary>
@@ -69,6 +81,23 @@ class TripListOptions extends React.Component {
                         onChange={event => this.handleTags(tag, event.currentTarget.checked)}
                       />
                       {tag}
+                    </label>
+                  ))}
+                </div>
+              </details>
+            </div>
+          </Col>
+          <Col lg={3}>
+            <div className={styles.filter}>
+              <details>
+                <summary className={styles.toggle}>Filter by region</summary>
+                <div className={styles.dropdown}>
+                  {Object.keys(regions).map(region => (
+                    <label key={region} className={styles.option}>
+                      <input type='checkbox' checked={filters.regions.indexOf(region) > -1}
+                        onChange={event => this.handleRegions(region, region.countries, event.currentTarget.checked)}
+                      />
+                      {region}
                     </label>
                   ))}
                 </div>
@@ -88,6 +117,9 @@ TripListOptions.propTypes = {
   changeDuration: PropTypes.func,
   addTag: PropTypes.func,
   removeTag: PropTypes.func,
+  addRegion: PropTypes.func,
+  removeRegion: PropTypes.func,
+  regions: PropTypes.object,
 };
 
 export default TripListOptions;

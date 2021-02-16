@@ -28,6 +28,13 @@ export const getFilteredTrips = ({trips, filters}) => {
     }
     //console.log('swiezy output', output);
   }
+
+  // TODO - filters by regions
+
+  if(filters.regions) {
+    console.log('trips redux', filters.regions);
+  }
+
   // TODO - sort by cost descending (most expensive goes first)
   console.log('swiezutki outpucik', output);
   const sorted = output.sort((a,b) => (parseInt(a.cost.slice(1)) > parseInt(b.cost.slice(1))) ? 1 : -1);
