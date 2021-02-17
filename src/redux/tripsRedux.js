@@ -20,7 +20,7 @@ export const getFilteredTrips = ({trips, filters, regions}) => {
     //console.log('output', output);
   }
   // TODO - filter by tags
-  if(filters.tags){
+  if(filters.tags.length){
     for (let tag of filters.tags){
       output = output.filter(trip =>
         trip.tags.includes(tag)
@@ -30,24 +30,18 @@ export const getFilteredTrips = ({trips, filters, regions}) => {
   }
 
   // TODO - filters by regions
-
-  if(filters.regions) {
-    console.log('obiekt regionów', regions);
-    console.log('wybrane regiony', filters.regions);
-    for (let trip of output){
-      for (let region of filters.regions){
-        console.log('patrze na regiony', regions[region].countries);
-        output = output.filter(trip => regions[region].countries.includes(trip.country.code));
-        if (regions[region].countries.includes(trip.country.code)){
-          console.log('gra gitara', trip);
-        }
+  console.log(filters);
+  if(filters.regions.length) {
+    let countriesForRegion = [];
+    for (let country in regions) {
+      if(filters.regions.includes(country)) {
+        countriesForRegion = [...countriesForRegion, ...regions[country].countries];
       }
     }
-
+    output = output.filter(trip => countriesForRegion.includes(trip.country.code));
   }
 
   // TODO - sort by cost descending (most expensive goes first)
-  console.log('swiezutki outpucik', output);
   output.sort((a,b) => (parseInt(a.cost.slice(1)) > parseInt(b.cost.slice(1))) ? 1 : -1);
   return output;
 };
@@ -68,9 +62,6 @@ export const getTripsForCountry = ({trips}, countryCode) => {
   );
 
   // TODO - filter trips by countryCode
-  console.log('trips:', trips);
-  console.log('countryCode:', countryCode);
-  console.log('filtering trips by countryCode:', countryCode, filtered);
   return filtered.length ? filtered : [{error: true}];
 };
 

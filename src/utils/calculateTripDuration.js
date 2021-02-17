@@ -4,3 +4,4 @@ export const addDays = function(date, days) {
   return result;
 };
 
+// moment.js do zarządzania datą
