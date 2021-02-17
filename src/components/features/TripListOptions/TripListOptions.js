@@ -36,8 +36,6 @@ class TripListOptions extends React.Component {
 
   render(){
     const {tags, filters, regions} = this.props;
-    console.log('regiony', regions);
-    console.log('tagi', tags);
     return (
       <div className={styles.component}>
         <Row around="lg">

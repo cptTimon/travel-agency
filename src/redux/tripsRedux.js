@@ -2,7 +2,7 @@
 
 export const getAllTrips = ({trips}) => trips;
 
-export const getFilteredTrips = ({trips, filters}) => {
+export const getFilteredTrips = ({trips, filters, regions}) => {
   let output = trips;
 
   // filter by search phrase
@@ -32,13 +32,23 @@ export const getFilteredTrips = ({trips, filters}) => {
   // TODO - filters by regions
 
   if(filters.regions) {
-    console.log('trips redux', filters.regions);
+    console.log('obiekt regionów', regions);
+    console.log('wybrane regiony', filters.regions);
+    for (let trip of output){
+      for (let region of filters.regions){
+        console.log('patrze na regiony', regions[region].countries);
+        output = output.filter(trip => regions[region].countries.includes(trip.country.code));
+        if (regions[region].countries.includes(trip.country.code)){
+          console.log('gra gitara', trip);
+        }
+      }
+    }
+
   }
 
   // TODO - sort by cost descending (most expensive goes first)
   console.log('swiezutki outpucik', output);
-  const sorted = output.sort((a,b) => (parseInt(a.cost.slice(1)) > parseInt(b.cost.slice(1))) ? 1 : -1);
-  console.log('sorted', sorted);
+  output.sort((a,b) => (parseInt(a.cost.slice(1)) > parseInt(b.cost.slice(1))) ? 1 : -1);
   return output;
 };
 
