@@ -30,7 +30,6 @@ export const getFilteredTrips = ({trips, filters, regions}) => {
   }
 
   // TODO - filters by regions
-  console.log(filters);
   if(filters.regions.length) {
     let countriesForRegion = [];
     for (let country in regions) {
