@@ -8,7 +8,7 @@ import OrderOptionIcons from './OrderOptionIcons';
 import OrderOptionText from './OrderOptionText';
 import OrderOptionDate from './OrderOptionDate';
 
-const optionTypes = {
+export const optionTypes = {
   dropdown: OrderOptionDropdown,
   icons: OrderOptionIcons,
   checkboxes: OrderOptionCheckboxes,
