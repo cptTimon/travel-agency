@@ -4,7 +4,6 @@ import styles from './OrderOption.scss';
 import {formatPrice} from '../../../utils/formatPrice';
 
 const newValueSet = (currentValue, id, checked) => {
-  console.log(currentValue);
   if(checked){
     return [
       ...currentValue,

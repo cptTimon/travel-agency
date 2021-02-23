@@ -48,7 +48,7 @@ const mockPropsForType = {
   checkboxes: {currentValue: [mockProps.currentValue]},
   number: {currentValue: 1},
   text: {},
-  date: {},
+  date: {currentValue: new Date()},
 };
 
 const testValue = mockProps.values[1].id;
@@ -146,8 +146,7 @@ for(let type in optionTypes){
         /* testy interaktywne do zrobienia */
         it('should run setOrderOption function on change', () => {
           const div = renderedSubcomponent.find('div');
-          console.log(div.childAt(1).debug());
-          (div.childAt(1)).simulate('change', {currentTarget: {checked: true}});
+          (div.childAt(1).find('input')).simulate('change', {currentTarget: {checked: true}});
           expect(mockSetOrderOption).toBeCalledTimes(1);
           expect(mockSetOrderOption).toBeCalledWith({[mockProps.id]: [mockProps.currentValue, testValue]});
         });
@@ -190,7 +189,7 @@ for(let type in optionTypes){
         /* tests for date */
         it('contains div with DatePicker inside', () => {
           const datePickerParent = renderedSubcomponent.find('div');
-          expect(datePickerParent.childAt(0).prop('selected')).toEqual(mockProps.currentValue);
+          expect(datePickerParent.childAt(0).prop('selected')).toEqual(mockPropsForType.date.currentValue);
         });
         it('should run setOrderOption function on change', () => {
           const datePickerParent = renderedSubcomponent.find('div');
