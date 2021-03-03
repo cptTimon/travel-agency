@@ -46,6 +46,15 @@ describe('utils', () => {
     it('should return number of remaining days to summer given the date 20.06.2020', () => {
       expect(calculateDaysToSummer(new Date(2020,5,20))).toBe('1 day left to summer!');
     });
+
+    it('should return number of remaining days to summer given the date 24.09.2018', () => {
+      expect(calculateDaysToSummer(new Date(2018,8,25))).toBe('269 days left to summer!');
+    });
+
+    it('should return number of remaining days to summer given the date 25.09.2020', () => {
+      expect(calculateDaysToSummer(new Date(2020,8,25))).toBe('269 days left to summer!');
+    });
+
   });
 });
 
